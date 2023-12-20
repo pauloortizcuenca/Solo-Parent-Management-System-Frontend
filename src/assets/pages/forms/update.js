@@ -3,10 +3,12 @@ import axios from "axios";
 import Webcam from "react-webcam";
 import html2canvas from "html2canvas";
 import Success from "../../img/success.svg";
+import { useSession } from '../solo-parent/session';
 
 function New() {
   // success message popup
   const [showPopup, setShowPopup] = useState(false);
+  const { session } = useSession();
 
   const showSuccessPopup = () => {
     setShowPopup(true);
@@ -322,7 +324,7 @@ function New() {
     try {
       // Make API call
       const response = await fetch(
-        "https://solo-parent.vercel.app/api/create-solo-parent-account",
+        `https://solo-parent.vercel.app/api/update-solo-parent-account/${session.soloParentFormId}`,
         {
           method: "POST",
           headers: {
@@ -334,25 +336,25 @@ function New() {
 
       // Check if the request was successful
       if (!response.ok) {
-        alert("Failed to create solo parent account");
+        alert("Failed to request update solo parent account");
         alert(response.statusText);
         // Handle the error case as needed
         return;
       }
       try {
         const responseData = await response.json();
-        alert("Solo parent account created successfully:", responseData);
+        alert("Solo parent update account requested successfully:", responseData);
         // You can also update your UI or perform other actions based on the response
       } catch (jsonError) {
         // If parsing as JSON fails, handle non-JSON response
         alert(
-          "Solo parent account created successfully:",
+          "Solo parent update account requested successfully:",
           response.statusText
         );
       }
     } catch (error) {
       alert(
-        "An error occurred while creating solo parent account:",
+        "An error occurred while updating solo parent account:",
         error.message
       );
       // Handle the error case as needed

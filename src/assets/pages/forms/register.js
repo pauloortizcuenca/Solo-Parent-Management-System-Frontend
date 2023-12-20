@@ -66,6 +66,7 @@ function New() {
       monthlyIncome: "",
       nameOfEmployer: "",
       employerAddress: "",
+      contactPerson: "",
       contactNumber: "",
       // other fields
       // reasons/circumstances: ''
@@ -890,12 +891,12 @@ function New() {
                     sa kaso ng Emergency)
                     <input
                       type="text"
-                      disabled
-                      readOnly
                       placeholder="Ex: John Doe"
-                      id=""
-                      name=""
+                      id="contactPerson"
+                      name="contactPerson"
                       className="mt-i"
+                      value={formState.contactPerson}
+                      onChange={handlePersonalInfoChange}
                     />
                   </label>
                   {/* There is no names yet */}
@@ -904,9 +905,11 @@ function New() {
                     <input
                       type="number"
                       placeholder="Ex: +639123456789"
-                      id=""
-                      name=""
+                      id="contactNumber"
+                      name="contactNumber"
                       className="mt-i"
+                      value={formState.contactNumber}
+                      onChange={handlePersonalInfoChange}
                     />
                   </label>
                 </div>
